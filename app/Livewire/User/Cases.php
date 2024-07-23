@@ -7,9 +7,15 @@ use Livewire\Component;
 
 class Cases extends Component
 {
-    #[Title('Case Ctrl - Cases')]
+    #[Title('Case Ctrl - Cases')]    
+
     public function render()
     {
         return view('livewire.user.cases');
+    }    
+ 
+    public function mount() 
+    {
+        
     }
 }
