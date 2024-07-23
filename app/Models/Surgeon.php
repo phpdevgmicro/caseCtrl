@@ -9,13 +9,13 @@ class Surgeon extends Model
 {
     use HasFactory;
     
-    public function clinicLocation()
+    public function clinicLocations()
     {
-        return $this->belongsToMany(surgeonClinicLocation::class, 'surgeon_id');
+        return $this->belongsToMany(Location::class, 'surgeon_clinic_locations');
     }
 
-    public function surgeryLocation()
+    public function surgeryLocations()
     {
-        return $this->belongsToMany(surgeonSurgeryLocation::class, 'surgeon_id');
+        return $this->belongsToMany(Location::class, 'surgeon_surgery_locations');
     }
 }

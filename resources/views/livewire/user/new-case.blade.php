@@ -101,31 +101,27 @@
                     <!--begin::Form-->
                     <div id="kt_account_profile_details_form" class="form">
                         <!--begin::Card body-->
-                        <h1>{{ $count }}</h1>
- 
- <button wire:click="increment">+</button>
 
- <button wire:click="decrement">-</button>
                         <div class="card-body border-top p-9">              
                             <!--begin::Input group-->
                             <div class="mb-6">
                                 <label class="required form-label fw-bold fs-8 text-gray-500 text-uppercase">Surgeon</label>
-                                <select wire:model="selectedSurgeon" name="surgeon" aria-label="Select a Surgeon" data-control="selecte2" data-placeholder="Select a surgeon..." class="form-select" data-allow-clear="true">
+                                <select  wire:model.live="selectedSurgeon" name="surgeon" aria-label="Select a Surgeon" data-control="selecte2" data-placeholder="Select a surgeon..." class="form-select" data-allow-clear="true">
                                     <option value="">Select a Surgeon...</option>
-                                    @foreach($this->surgeons as $surgeon)
+                                    @foreach($surgeons as $surgeon)
                                         <option value="{{ $surgeon->id }}">{{ $surgeon->fullname }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <!--end::Input group-->
-                            
+                         
                             <!--begin::Input group-->
                             <div class="mb-6">
                                 <label class="required form-label fw-bold fs-8 text-gray-500 text-uppercase">Location</label>
-                                <select name="location" aria-label="Select a Location" data-control="select2" data-placeholder="Select a surgeon first" class="form-select form-select-solid" data-allow-clear="true">
-                                    <option value="">Select a Location...</option>
-                                    @foreach($this->surgeonAddresses as $address)
-                                        <option value="{{ $address->id }}">{{ $address->location }}</option>
+                                <select wire:key="{{ $selectedSurgeon }} name="location" aria-label="Select a Surgery Location" data-control="select2" data-placeholder="Select a surgeon first" class="form-select form-select-solid" data-allow-clear="true">
+                                    <option value="">Select a Surgery Location</option>
+                                    @foreach($surgeryLocations as $location)
+                                        <option value="{{ $location['id'] }}">{{ $location['address']}} {{$location['city']}} {{$location['state']}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -133,10 +129,10 @@
                             <!--begin::Input group-->
                             <div class="">
                                 <label class="required form-label fw-bold fs-8 text-gray-500 text-uppercase">Clinic Location</label>
-                                <select name="location" aria-label="Select a Clinic Location" data-control="select2" data-placeholder="Select a surgeon first" class="form-select form-select-solid" data-allow-clear="true">
-                                    <option value="">Select a Clinic Location...</option>
-                                    @foreach($this->surgeonClinicLocations as $clinicLocation)
-                                        <option value="{{ $clinicLocation->id }}">{{ $clinicLocation->location }}</option>
+                                <select wire:key="{{ $selectedSurgeon }} name="location" aria-label="Select a Clinic Location" data-control="select2" data-placeholder="Select a surgeon first" class="form-select form-select-solid" data-allow-clear="true">
+                                    <option value="">Select a Clinic Location</option>
+                                    @foreach($clinicLocations as $location)
+                                        <option value="{{ $location['id'] }}">{{ $location['address']}} {{$location['city']}} {{$location['state']}}</option>
                                     @endforeach
                                 </select>
                             </div>

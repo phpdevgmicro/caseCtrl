@@ -7,11 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class surgeonSurgeryLocation extends Model
 {
-    use HasFactory;
-
-    public function location()
-    {
-        return $this->hasOne(Location::class, 'id', 'location_id');
-    }
-    
+    use HasFactory;    
 }

@@ -4,6 +4,7 @@ namespace App\Livewire\User;
 
 use Livewire\Component;
 use App\Models\Surgeon;
+use App\Models\Location;
 use Livewire\Attributes\Title;
 
 class NewCase extends Component
@@ -11,21 +12,30 @@ class NewCase extends Component
     #[Title('Case Ctrl - New Case')]
     public $surgeons;
     public $selectedSurgeon = null;
-    public $surgeonAddresses = [];
-    public $surgeonClinicLocations = [];
-    public $count = 1;
- 
-    public function increment()
+    public $surgeryLocations = [];
+    public $clinicLocations = [];
+
+    public function mount()
     {
-        $this->count++;
+        $this->surgeons = Surgeon::select('id', 'fullname')->get();
     }
- 
-    public function decrement()
+
+    public function updatedSelectedSurgeon($surgeonId)
     {
-        $this->count--;
+        //dd($surgeonId);
+        $this->surgeryLocations = [];
+        $this->clinicLocations = [];
+
+        if ($surgeonId) {
+            $surgeon = Surgeon::find($surgeonId);
+
+            if ($surgeon) {
+                $this->surgeryLocations = $surgeon->surgeryLocations()->get()->toArray();
+                $this->clinicLocations = $surgeon->clinicLocations()->get()->toArray();
+            }
+        }
     }
- 
-    
+
     public function render()
     {
         return view('livewire.user.new-case', [
@@ -37,24 +47,5 @@ class NewCase extends Component
                 ["id" => "case-preference", "title" => "Case Preferences", "icon" => '<i class="las la-clipboard-list text-gray-400 fs-1"></i>']
             ],
         ])->layoutData(['asideEnabled' => true]);
-    }
-
-    public function mount()
-    {
-        $this->surgeons = Surgeon::with(['address', 'clinicLocation'])->get();
-    }
-
-    public function updatedSelectedSurgeon($surgeonId)
-    {
-       
-        $surgeon = Surgeon::with(['address', 'clinicLocation'])->find($surgeonId);
-
-        if ($surgeon) {
-            $this->surgeonAddresses = [$surgeon->address];
-            $this->surgeonClinicLocations = [$surgeon->clinicLocation];
-        } else {
-            $this->surgeonAddresses = [];
-            $this->surgeonClinicLocations = [];
-        }
     }
 }
