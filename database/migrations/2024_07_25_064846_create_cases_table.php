@@ -34,11 +34,11 @@ return new class extends Migration
             $table->integer('blood_unit')->nullable();
             $table->string('facilty_equipment')->nullable();
             $table->enum('admission_plan', ['outpatient','extended_recovery','same_day_admit']);
-            $table->string('anesthesia')->nullable();
-            $table->string('antibiotics')->nullable();
-            $table->string('pain_medication')->nullable();
+            $table->text('anesthesia')->nullable();
+            $table->text('antibiotics')->nullable();
+            $table->text('pain_medication')->nullable();
             $table->boolean('neuromuscular_monitoring')->default(0);
-            $table->enum('save_as', ['quick_pick', 'draft', 'case'])->default('case');   
+            $table->enum('save_as', ['quick-pick', 'draft', 'new-case'])->default('new-case');   
             $table->timestamps(); 
         });
     }

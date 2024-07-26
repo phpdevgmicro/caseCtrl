@@ -9,5 +9,10 @@ class Patient extends Model
 {
     use HasFactory;
 
-   
+    protected $fillable = ['first_name', 'last_name', 'dob', 'phone'];
+
+    public function cases()
+    {
+        return $this->hasMany(CaseModel::class);
+    }
 }

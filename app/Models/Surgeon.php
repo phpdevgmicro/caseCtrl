@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Surgeon extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['name', 'specialty'];
     
     public function clinicLocations()
     {
@@ -17,5 +19,10 @@ class Surgeon extends Model
     public function surgeryLocations()
     {
         return $this->belongsToMany(Location::class, 'surgeon_surgery_locations');
+    }
+
+    public function cases()
+    {
+        return $this->hasMany(CaseModel::class);
     }
 }

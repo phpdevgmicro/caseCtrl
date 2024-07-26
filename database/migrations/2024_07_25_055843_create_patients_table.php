@@ -22,7 +22,7 @@ class CreatePatientsTable extends Migration
             $table->string('phone')->nullable();
             $table->string('mrn')->nullable();             
             $table->string('ssn')->nullable(); 
-            $table->enum('gender', ['male', 'female', 'other'])->default('other');            
+            $table->string('gender')->nullable();
             $table->string('home_phone')->nullable(); 
             $table->string('address_line1')->nullable();
             $table->string('address_line2')->nullable();

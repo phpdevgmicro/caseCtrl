@@ -2,41 +2,131 @@
 
 namespace App\Livewire\User;
 
+use Livewire\Attributes\Validate; 
 use Livewire\Component;
 use App\Models\Surgeon;
 use App\Models\Location;
-use App\Models\User;
 use App\Models\Patient;
-use App\Models\CaseModal;
+use App\Models\CaseModel;
+use Illuminate\Support\Facades\Log;
 use Livewire\Attributes\Title;
+use Illuminate\Support\Facades\DB;
+
 
 class NewCase extends Component
-{
-    #[Title('Case Ctrl - New Case')]
-    public $surgeons ;
-    public $mrn, $fname, $lname, $dob, $ssn, $email, $phone, $phone2 ,
-            $address1, $address2, $city, $state, $postal_code, $guardian, $gender = '' ;
+{   
+    #[Title('Case Ctrl - New Case')] 
+    
+    public $save_as = "draft";
+    public $priority='Low';
+    public $surgery_date;
+    public $scheduling_status = 'scheduler discretion';
+    public $is_standby = false;
+    public $clearance = [];
+    public $surgery_notes;
+    public $case_instruction;
+    public $neuromuscular_monitoring = false;
+    public $facilty_equipment;
 
-    public $priority = 'Low', $surgery_date, $scheduling_status = 'scheduler discretion',$is_standby = false, $clearance = [], $surgery_notes, $case_instruction, $neuromuscular_monitoring = false;
+    public $case_title;
+    public $blood_unit = 0;
+    public $facility_equipment;
+    public $admission_plan='outpatient';
+    public $anesthesia = [];
+    public $antibiotics = [];
+    public $pain_medication = [];
 
-    public $case_title, $surgery_duration, $blood_unit, $facilty_equipment = '' ,$admission_plan = 'outpatient', $anesthesia =[], $antibiotics= [], $pain_medication = [];
+    public $mrn;
+    public $ssn;
+    public $email;
+    public $phone;
+    public $phone2;
+    public $address1;
+    public $address2;
+    public $city;
+    public $state;
+    public $postal_code;
+    public $guardian = false;
+    public $gender ;
 
-    public $selectedSurgeon = null;
+    #[Validate('required')]
+    public $surgeon, $first_name, $last_name, $dob, $surgery_location, $clinic_location, $surgery_duration; 
+    
     public $surgeryLocations = [];
+    public $surgeons = [];
     public $clinicLocations = [];
-    public case_list $draft;
 
     public function mount()
     {
         $this->surgeons = Surgeon::select('id', 'fullname')->get();
+    }    
+
+    public function saveCase()
+    {           
+        try {            
+            $this->validate(); 
+            //dd($this->all());
+            DB::beginTransaction();
+
+            $patient = new Patient;       
+            $patient->first_name  = $this->first_name;
+            $patient->last_name = $this->last_name;
+            $patient->dob = $this->dob;
+            $patient->ssn = $this->ssn;
+            $patient->mrn = $this->mrn;
+            $patient->gender = $this->gender;
+            $patient->email = $this->email;
+            $patient->phone = $this->phone;
+            $patient->home_phone = $this->phone2;
+            $patient->address_line1 = $this->address1;
+            $patient->address_line2 = $this->address2;
+            $patient->city = $this->city;
+            $patient->state = $this->state;
+            $patient->postal_code = $this->postal_code;
+            $patient->guardian = $this->guardian;
+            $patient->save();        
+
+            $caseNo = $this->generateCaseNo();
+
+            $case = new caseModel;
+            $case->case_number = $caseNo;
+            $case->title  = $this->case_title;
+            $case->surgeon_id = $this->surgeon;
+            $case->surgery_location = $this->surgery_location;
+            $case->clinic_location = $this->clinic_location;
+            $case->patient_id = $patient->id;        
+            $case->priority  = $this->priority;
+            $case->surgery_date  = $this->surgery_date;
+            $case->scheduling_status  = $this->scheduling_status;
+            $case->is_standby  = $this->is_standby;
+            $case->surgery_notes  = $this->surgery_notes;
+            $case->clearance  = $this->clearance;
+            $case->case_instruction = $this->case_instruction;       
+            $case->surgery_duration  = $this->surgery_duration;
+            $case->blood_unit  = $this->blood_unit;
+            $case->facilty_equipment  = $this->facilty_equipment;
+            $case->admission_plan  = $this->admission_plan;
+            $case->neuromuscular_monitoring =  $this->neuromuscular_monitoring;
+            $case->clearance  = $this->clearance;
+            $case->anesthesia = $this->anesthesia;
+            $case->antibiotics = $this->antibiotics;
+            $case->pain_medication = $this->pain_medication;
+            $case->save_as = $this->save_as;
+            $case->save();
+
+            DB::commit();
+            
+            $this->dispatch('save-case', status: 'success', msg: 'Case is save successfully as '.$this->save_as);
+            $this->redirect('/cases', navigate: true); 
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            Log::error(":: EXCEPTION CASE:: " . $th->getMessage() . "\n" . $th->getTraceAsString());
+            $this->dispatch('save-case', status: 'error', msg: 'Missing details! Please check your fields and try again.');
+        }            
     }
 
-    public function updatedSelectedSurgeon($surgeonId)
-    {
-        //dd($surgeonId);
-        $this->surgeryLocations = [];
-        $this->clinicLocations = [];
-
+    public function updatedSurgeon($surgeonId)
+    {   
         if ($surgeonId) {
             $surgeon = Surgeon::find($surgeonId);
            
@@ -47,103 +137,18 @@ class NewCase extends Component
         }
     }
 
-    public function validationRuleForSave(): array
-    {
-        return [
-            // 'fname' => 'required',
-            // 'lname' => 'required',
-            // 'dob' => 'required',
-            // 'priority' => 'required',
-            // 'surgery_duration' => 'required',
-            // 'admission_plan' => 'required',
-        ];
-    }
-
-    public function PatientInformation()
-    {
-        // $this->validate( $this->validationRuleForSave() );
-      
-        $Patient = new Patient ;
-        $Patient->mrn  = $this->mrn ;
-        $Patient->first_name  = $this->fname;
-        $Patient->last_name = this->lname;
-        $Patient->dob  = $this->dob ;
-        $Patient->ssn  = $this->ssn ;
-        $Patient->gender  = $this->gender ;
-        $Patient->email  = $this->email ;
-        $Patient->phone  = $this->phone ;
-        $Patient->home_phone  = $this->phone2;
-        $Patient->address_line1  = $this->address1 ;
-        $Patient->address_line2  = $this->address2 ;
-        $Patient->city  = $this->city ;
-        $Patient->state  = $this->state ;
-        $Patient->postal_code  = $this->postal_code ;
-        $Patient->guardian  = $this->guardian ;
-        // dd( $Patient);
+    private function generateCaseNo()
+    {    
+        $lastCase = CaseModel::orderBy('id', 'desc')->first();
         
-        // $Patient->save();
-
-        if($Patient->id){
-            $Case = new case_list ;
-            $Case->patient_id = $Patient->id;
-            $Case->priority  = $this->priority ;
-            $Case->surgery_date  = $this->surgery_date ;
-            $Case->scheduling_status  = $this->scheduling_status ;
-            $Case->is_standby  = $this->is_standby ;
-            $Case->surgery_notes  = $this->surgery_notes ;
-            $Case->case_instruction = $this->case_instruction ;
-            $Case->case_title  = $this->case_title ;
-            $Case->surgery_duration  = $this->surgery_duration ;
-            $Case->blood_unit  = $this->blood_unit ;
-            $Case->facilty_equipment  = $this->facilty_equipment ;
-            $Case->admission_plan  = $this->admission_plan ;
-            $Case->neuromuscular_monitoring =  $this->neuromuscular_monitoring;
-            // $Case->clearance  = $this->clearance ;
-            // $Case->anesthesia = $this->anesthesia;
-            // $Case->antibiotics = $this->antibiotics;
-            // $Case->pain_medication = $this->pain_medication ;
-        
-            // dd($Case);
-            // $Case->save();
+        if ($lastCase) {
+            $CaseNo = 'Case' . str_pad((int)substr($lastCase->case_number, 7) + 1, strlen($lastCase->case_number) - 7, '0', STR_PAD_LEFT);
+        } else {
+            $CaseNo = 'Case000000001';
         }
 
-        // $this->reset( 'mrn', 'fname', 'lname', 'dob', 'ssn','gender','email','phone','home_phone',
-        //             'address1','address2','city','state','postal_code','guardian' );
+        return $CaseNo;
     }
-
-    public function savedraft()
-    {
-        // dd("hello");
-        return response()->savedraft(
-            $this->draft, '1' 
-        );
-    }
-
-    // public function SchedulingDetails()
-    // {
-    //     $User = new User ;
-    //     $User->priority  = $this->priority ;
-    //     $User->surgery_date  = $this->surgery_date ;
-    //     $User->scheduling_status  = $this->scheduling_status ;
-    //     $User->is_standby  = $this->is_standby ;
-    //     $User->clearance  = $this->clearance ;
-    //     $User->surgery_notes  = $this->surgery_notes ;
-    //     $User->case_instruction = $this->case_instruction ;
-    //     dd($User);
-    // }
-
-    // public function CasePreferences()
-    // {
-    //     $User = new User ;
-    //     $User->case_title  = $this->case_title ;
-    //     $User->surgery_duration  = $this->surgery_duration ;
-    //     $User->blood_unit  = $this->blood_unit ;
-    //     $User->facilty_equipment  = $this->facilty_equipment ;
-    //     $User->admission_plan  = $this->admission_plan ;
-    //     $User->anesthesia = $this->anesthesia;
-    //     $User->antibiotics = $this->antibiotics;
-    //     dd($User);
-    // }
 
     public function render()
     {

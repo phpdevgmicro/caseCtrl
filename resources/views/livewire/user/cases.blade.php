@@ -306,24 +306,35 @@
                         <!--end::Table head-->
                         <!--begin::Table body-->
                         <tbody class="fw-bold text-gray-600">
+                            @foreach($cases as $case)
                             <tr>
-                                <!--begin::Company=-->
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-
-                                <td>-</td>
-                                <td>-</td>
-
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                                
-                                
+                                <td>{{$case->patient->first_name}} {{$case->patient->last_name}}</td>
+                                <td>{{$case->title}}</td>
+                                <td>
+                                    @if($case->priority == "High")
+                                    <span class="badge badge-light-success text-success fs-7 fw-bolder">High</span>
+                                    @elseif($case->priority == "Medium")
+                                    <span class="badge badge-light-warning text-warning fs-7 fw-bolder">Medium</span>
+                                    @else
+                                    <span class="badge badge-light-dark text-muted fs-7 fw-bolder">Low</span>
+                                    @endif
+                                </td>
+                                <td>{{$case->surgeon->fullname}}</td>
+                                <td>{{$case->patient->surgery_notes}}</td>
+                                <td></td>
+                                <td>
+                                    @if($case->is_standby)
+                                    <span class="badge badge-light text-success">&#10003;</span>
+                                    @else
+                                    <span class="badge badge-light text-success">&#10005;</span>
+                                    @endif
+                                </td>
+                                <td>{{$case->surgery_date}}</td>
+                                <td>{{$case->clearence}}</td>
+                                <td>{{$case->is_standby}}</td>
                                 <!--end::Action=-->
-                            </tr>                           
+                            </tr>
+                            @endforeach                           
                         </tbody>
                         <!--end::Table body-->
                     </table>
