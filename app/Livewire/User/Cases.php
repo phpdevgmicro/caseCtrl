@@ -14,7 +14,8 @@ class Cases extends Component
 
     public function mount() 
     {
-        $this->cases = CaseModel::with(['surgeon', 'patient', 'location'])->get();
+        $this->cases = CaseModel::with(['surgeon', 'patient', 'location'])->orderby('id', 'desc')->get();
+        //dd($this->cases);
     }
 
     public function render()

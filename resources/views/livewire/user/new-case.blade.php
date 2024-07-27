@@ -654,25 +654,17 @@
         }        
     });
     document.addEventListener('livewire:initialized', () => {
-        Inputmask({
-            "mask" : "(999) 999-9999"
-        }).mask(".kt_inputmask_phone");
 
-        Inputmask({
-            mask: "*{1,20}[.*{1,20}][.*{1,20}][.*{1,20}]@*{1,20}[.*{2,6}][.*{1,2}]",
-            greedy: false,
-            onBeforePaste: function (pastedValue, opts) {
-                pastedValue = pastedValue.toLowerCase();
-                return pastedValue.replace("mailto:", "");
-            },
-            definitions: {
-                "*": {
-                    validator: '[0-9A-Za-z!#$%&"*+/=?^_`{|}~\-]',
-                    cardinality: 1,
-                    casing: "lower"
-                }
-            }
-        }).mask("#kt_inputmask_email");
+        Livewire.hook('component.init', ({ component, cleanup }) => {
+          console.log('inittt');
+          console.log(component);
+          console.log(cleanup);
+          if(component.name == "user.new-case"){
+            console.log('inittt');
+           
+          }
+        })
+        
     })
 </script>
 @endscript

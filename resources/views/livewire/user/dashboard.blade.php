@@ -28,101 +28,7 @@
 			</div>
 			<!--end::Page title-->
 			<!--begin::Actions-->
-			<div class="d-flex align-items-center py-3 py-md-1">
-				<!--begin::Wrapper-->
-				<div class="me-4">
-					<!--begin::Menu-->
-					<a href="#" class="btn btn-custom btn-active-white btn-flex btn-color-white btn-active-color-primary fw-bolder" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-					<!--begin::Svg Icon | path: icons/duotune/general/gen031.svg-->
-					<span class="svg-icon svg-icon-5 svg-icon-gray-500 me-1">
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-							<path d="M19.0759 3H4.72777C3.95892 3 3.47768 3.83148 3.86067 4.49814L8.56967 12.6949C9.17923 13.7559 9.5 14.9582 9.5 16.1819V19.5072C9.5 20.2189 10.2223 20.7028 10.8805 20.432L13.8805 19.1977C14.2553 19.0435 14.5 18.6783 14.5 18.273V13.8372C14.5 12.8089 14.8171 11.8056 15.408 10.964L19.8943 4.57465C20.3596 3.912 19.8856 3 19.0759 3Z" fill="black" />
-						</svg>
-					</span>
-					<!--end::Svg Icon-->Filter</a>
-					<!--begin::Menu 1-->
-					<div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px" data-kt-menu="true" id="kt_menu_61484fe00ce0c">
-						<!--begin::Header-->
-						<div class="px-7 py-5">
-							<div class="fs-5 text-dark fw-bolder">Filter Options</div>
-						</div>
-						<!--end::Header-->
-						<!--begin::Menu separator-->
-						<div class="separator border-gray-200"></div>
-						<!--end::Menu separator-->
-						<!--begin::Form-->
-						<div class="px-7 py-5">
-							<!--begin::Input group-->
-							<div class="mb-10">
-								<!--begin::Label-->
-								<label class="form-label fw-bold">Status:</label>
-								<!--end::Label-->
-								<!--begin::Input-->
-								<div>
-									<select class="form-select form-select-solid" data-kt-select2="true" data-placeholder="Select option" data-dropdown-parent="#kt_menu_61484fe00ce0c" data-allow-clear="true">
-										<option></option>
-										<option value="1">Approved</option>
-										<option value="2">Pending</option>
-										<option value="2">In Process</option>
-										<option value="2">Rejected</option>
-									</select>
-								</div>
-								<!--end::Input-->
-							</div>
-							<!--end::Input group-->
-							<!--begin::Input group-->
-							<div class="mb-10">
-								<!--begin::Label-->
-								<label class="form-label fw-bold">Member Type:</label>
-								<!--end::Label-->
-								<!--begin::Options-->
-								<div class="d-flex">
-									<!--begin::Options-->
-									<label class="form-check form-check-sm form-check-custom form-check-solid me-5">
-										<input class="form-check-input" type="checkbox" value="1" />
-										<span class="form-check-label">Author</span>
-									</label>
-									<!--end::Options-->
-									<!--begin::Options-->
-									<label class="form-check form-check-sm form-check-custom form-check-solid">
-										<input class="form-check-input" type="checkbox" value="2" checked="checked" />
-										<span class="form-check-label">Customer</span>
-									</label>
-									<!--end::Options-->
-								</div>
-								<!--end::Options-->
-							</div>
-							<!--end::Input group-->
-							<!--begin::Input group-->
-							<div class="mb-10">
-								<!--begin::Label-->
-								<label class="form-label fw-bold">Notifications:</label>
-								<!--end::Label-->
-								<!--begin::Switch-->
-								<div class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
-									<input class="form-check-input" type="checkbox" value="" name="notifications" checked="checked" />
-									<label class="form-check-label">Enabled</label>
-								</div>
-								<!--end::Switch-->
-							</div>
-							<!--end::Input group-->
-							<!--begin::Actions-->
-							<div class="d-flex justify-content-end">
-								<button type="reset" class="btn btn-sm btn-light btn-active-light-primary me-2" data-kt-menu-dismiss="true">Reset</button>
-								<button type="submit" class="btn btn-sm btn-primary" data-kt-menu-dismiss="true">Apply</button>
-							</div>
-							<!--end::Actions-->
-						</div>
-						<!--end::Form-->
-					</div>
-					<!--end::Menu 1-->
-					<!--end::Menu-->
-				</div>
-				<!--end::Wrapper-->
-				<!--begin::Button-->
-				<a href="#" class="btn btn-bg-white btn-active-color-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Create</a>
-				<!--end::Button-->
-			</div>
+		
 			<!--end::Actions-->
 		</div>
 		<!--end::Container-->
@@ -161,6 +67,7 @@
 											</svg>
 										</span>
 										<!--end::Svg Icon-->
+										<span class="text-gray-900 fw-bold d-block fs-2 mb-2 mt-5">{{$draftCase}}</span>
 										<a href="#" class="text-dark fw-bold fs-6">Draft Case</a>
 									</div>
 									<!--end::Col-->
@@ -174,11 +81,12 @@
 											</svg>
 										</span>
 										<!--end::Svg Icon-->
+										<span class="text-gray-900 fw-bold d-block fs-2 mb-2 mt-5">{{$progressCase}}</span>
 										<a href="#" class="text-info fw-bold fs-6">In Progress Cases</a>
 									</div>
 									<!--end::Col-->
 									<!--begin::Col-->
-									<div class="col bg-light-dark px-6 py-8 rounded-2 mb-7">
+									<div class="col bg-light-dark px-6 py-8 rounded-2 mb-7 me-7">
 										<!--begin::Svg Icon | path: icons/duotune/finance/fin006.svg-->
 										<span class="svg-icon svg-icon-3x svg-icon-info d-block my-2">
 											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -187,13 +95,10 @@
 											</svg>
 										</span>
 										<!--end::Svg Icon-->
+										<span class="text-gray-900 fw-bold d-block fs-2 mb-2 mt-5">{{$readyToConfirmCase}}</span>
 										<a href="#" class="text-info fw-bold fs-6">Ready To Confirm Cases</a>
 									</div>
 									<!--end::Col-->
-								</div>
-								<!--end::Row-->
-								<!--begin::Row-->
-								<div class="row g-0">
 									<!--begin::Col-->
 									<div class="col bg-light-dark px-6 py-8 rounded-2 mb-7 me-7">
 										<!--begin::Svg Icon | path: icons/duotune/abstract/abs027.svg-->
@@ -204,11 +109,12 @@
 											</svg>
 										</span>
 										<!--end::Svg Icon-->
+										<span class="text-gray-900 fw-bold d-block fs-2 mb-2 mt-5">{{$confirmedCase}}</span>
 										<a href="#" class="text-success fw-bold fs-6 mt-2">Confirmed Cases</a>
 									</div>
 									<!--end::Col-->
 									<!--begin::Col-->
-									<div class="col bg-light-dark px-6 py-8 rounded-2 mb-7 me-7">
+									<div class="col bg-light-dark px-6 py-8 rounded-2 mb-7">
 										<!--begin::Svg Icon | path: icons/duotune/communication/com010.svg-->
 										<span class="svg-icon svg-icon-3x svg-icon-success d-block my-2">
 											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -217,20 +123,8 @@
 											</svg>
 										</span>
 										<!--end::Svg Icon-->
+										<span class="text-gray-900 fw-bold d-block fs-2 mb-2 mt-5">{{$completedCase}}</span>
 										<a href="#" class="text-success fw-bold fs-6 mt-2">Completed Cases</a>
-									</div>
-									<!--end::Col-->
-										<!--begin::Col-->
-										<div class="col bg-light-dark px-6 py-8 rounded-2 mb-7">
-										<!--begin::Svg Icon | path: icons/duotune/communication/com010.svg-->
-										<span class="svg-icon svg-icon-3x svg-icon-warning d-block my-2">
-											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-												<path d="M6 8.725C6 8.125 6.4 7.725 7 7.725H14L18 11.725V12.925L22 9.725L12.6 2.225C12.2 1.925 11.7 1.925 11.4 2.225L2 9.725L6 12.925V8.725Z" fill="black" />
-												<path opacity="0.3" d="M22 9.72498V20.725C22 21.325 21.6 21.725 21 21.725H3C2.4 21.725 2 21.325 2 20.725V9.72498L11.4 17.225C11.8 17.525 12.3 17.525 12.6 17.225L22 9.72498ZM15 11.725H18L14 7.72498V10.725C14 11.325 14.4 11.725 15 11.725Z" fill="black" />
-											</svg>
-										</span>
-										<!--end::Svg Icon-->
-										<a href="#" class="text-warning fw-bold fs-6 mt-2">Holding Cases</a>
 									</div>
 									<!--end::Col-->
 								</div>
@@ -238,7 +132,21 @@
 								<!--begin::Row-->
 								<div class="row g-0">
 									<!--begin::Col-->
-									<div class="col bg-light-dark px-6 py-8 rounded-2">
+									<div class="col bg-light-dark px-6 py-8 rounded-2 mb-7 me-7">
+									<!--begin::Svg Icon | path: icons/duotune/communication/com010.svg-->
+										<span class="svg-icon svg-icon-3x svg-icon-warning d-block my-2">
+											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+												<path d="M6 8.725C6 8.125 6.4 7.725 7 7.725H14L18 11.725V12.925L22 9.725L12.6 2.225C12.2 1.925 11.7 1.925 11.4 2.225L2 9.725L6 12.925V8.725Z" fill="black" />
+												<path opacity="0.3" d="M22 9.72498V20.725C22 21.325 21.6 21.725 21 21.725H3C2.4 21.725 2 21.325 2 20.725V9.72498L11.4 17.225C11.8 17.525 12.3 17.525 12.6 17.225L22 9.72498ZM15 11.725H18L14 7.72498V10.725C14 11.325 14.4 11.725 15 11.725Z" fill="black" />
+											</svg>
+										</span>
+										<!--end::Svg Icon-->
+										<span class="text-gray-900 fw-bold d-block fs-2 mb-2 mt-5">{{$holdCase}}</span>
+										<a href="#" class="text-warning fw-bold fs-6 mt-2">Holding Cases</a>
+									</div>
+									<!--end::Col-->
+									<!--begin::Col-->
+									<div class="col bg-light-dark px-6 py-8 rounded-2  mb-7">
 										<!--begin::Svg Icon | path: icons/duotune/abstract/abs027.svg-->
 										<span class="svg-icon svg-icon-3x svg-icon-danger d-block my-2">
 											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -247,11 +155,12 @@
 											</svg>
 										</span>
 										<!--end::Svg Icon-->
+										<span class="text-gray-900 fw-bold d-block fs-2 mb-2 mt-5">{{$canceledCase}}</span>
 										<a href="#" class="text-danger fw-bold fs-6 mt-2">Canceled Cases</a>
 									</div>
 									<!--end::Col-->
 								</div>
-								<!--end::Row-->	
+								<!--end::Row-->
 							</div>
 							<!--end::Stats-->
 						</div>

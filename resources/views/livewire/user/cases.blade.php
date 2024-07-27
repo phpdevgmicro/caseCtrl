@@ -330,7 +330,10 @@
                                     @endif
                                 </td>
                                 <td>{{$case->surgery_date}}</td>
-                                <td>{{$case->clearence}}</td>
+                                <td> @foreach($case->clearance as $clearance)
+                                        <span class="badge badge-secondary inline-block">{{ $clearance }}</span>
+                                    @endforeach
+                                </td>
                                 <td>{{$case->is_standby}}</td>
                                 <!--end::Action=-->
                             </tr>

@@ -38,7 +38,8 @@ return new class extends Migration
             $table->text('antibiotics')->nullable();
             $table->text('pain_medication')->nullable();
             $table->boolean('neuromuscular_monitoring')->default(0);
-            $table->enum('save_as', ['quick-pick', 'draft', 'new-case'])->default('new-case');   
+            $table->enum('save_as', ['quick-pick', 'draft', 'new-case'])->default('new-case');
+            $table->string('case_status')->nullable();    
             $table->timestamps(); 
         });
     }

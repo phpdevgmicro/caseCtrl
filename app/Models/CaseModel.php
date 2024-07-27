@@ -12,7 +12,7 @@ class CaseModel extends Model
 
     protected $table = 'cases';
 
-    protected $fillable = ['surgery_location', 'surgeon_id', 'clinic_location', 'description'];
+    protected $fillable = ['surgery_location', 'surgeon_id', 'clearance', 'clinic_location', 'description'];
 
     public function location()
     {
@@ -33,10 +33,10 @@ class CaseModel extends Model
     {
         return Attribute::make(
             get: fn ($value) => $value ? explode(',', $value) : [],
-            set: fn ($value) => !empty($value) ? implode(',', $value) : '',
+            set: fn ($value) => !empty($value) ? explode(',', $value) : '',
         );
     }
-
+    
     protected function painMedication(): Attribute
     {
         return Attribute::make(
