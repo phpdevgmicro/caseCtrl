@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Livewire\User;
+
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use App\Models\CaseModel;
@@ -9,24 +10,25 @@ class Dashboard extends Component
 {    
     #[Title('Case Ctrl - Dashboard')]
 
-    public $draftCase = 0;
-    public $progressCase = 0;
-    public $readyToConfirmCase = 0;
-    public $confirmedCase = 0;
-    public $completedCase = 0;
-    public $holdCase = 0;
-    public $canceledCase = 0;
+    public $caseCounts = [
+        'DRAFT' => 0,
+        'INPROGRESS' => 0,
+        'READYTOCONFIRM' => 0,
+        'CONFIRMED' => 0,
+        'COMPLETED' => 0,
+        'HOLD' => 0,
+        'CANCELED' => 0,
+    ];
 
     public function mount() 
     {
-        $this->draftCase = CaseModel::where('save_as', 'draft')->count();
-        // $this->draftCase = CaseModel::where('save_as', 'draft')->count();
-        // $this->draftCase = CaseModel::where('save_as', 'draft')->count();
-        // $this->draftCase = CaseModel::where('save_as', 'draft')->count();
-        // $this->draftCase = CaseModel::where('save_as', 'draft')->count();
-        // $this->draftCase = CaseModel::where('save_as', 'draft')->count();
-        // $this->draftCase = CaseModel::where('save_as', 'draft')->count();
-        //dd($this->cases);
+        $cases = CaseModel::select('case_status', \DB::raw('count(*) as total'))
+                          ->groupBy('case_status')
+                          ->get();
+
+        foreach ($cases as $case) {
+            $this->caseCounts[$case->case_status] = $case->total;
+        }
     }
 
     public function render()

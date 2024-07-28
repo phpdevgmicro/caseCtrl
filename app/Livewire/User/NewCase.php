@@ -112,6 +112,9 @@ class NewCase extends Component
             $case->antibiotics = $this->antibiotics;
             $case->pain_medication = $this->pain_medication;
             $case->save_as = $this->save_as;
+            if($this->save_as == "draft"){
+                $case->case_status = "DRAFT"; 
+            }
             $case->save();
 
             DB::commit();

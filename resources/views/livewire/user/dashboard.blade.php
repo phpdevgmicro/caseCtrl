@@ -67,7 +67,7 @@
 											</svg>
 										</span>
 										<!--end::Svg Icon-->
-										<span class="text-gray-900 fw-bold d-block fs-2 mb-2 mt-5">{{$draftCase}}</span>
+										<span class="text-gray-900 fw-bold d-block fs-2 mb-2 mt-5">{{$caseCounts['DRAFT']}}</span>
 										<a href="#" class="text-dark fw-bold fs-6">Draft Case</a>
 									</div>
 									<!--end::Col-->
@@ -81,7 +81,7 @@
 											</svg>
 										</span>
 										<!--end::Svg Icon-->
-										<span class="text-gray-900 fw-bold d-block fs-2 mb-2 mt-5">{{$progressCase}}</span>
+										<span class="text-gray-900 fw-bold d-block fs-2 mb-2 mt-5">{{$caseCounts['INPROGRESS']}}</span>
 										<a href="#" class="text-info fw-bold fs-6">In Progress Cases</a>
 									</div>
 									<!--end::Col-->
@@ -95,7 +95,7 @@
 											</svg>
 										</span>
 										<!--end::Svg Icon-->
-										<span class="text-gray-900 fw-bold d-block fs-2 mb-2 mt-5">{{$readyToConfirmCase}}</span>
+										<span class="text-gray-900 fw-bold d-block fs-2 mb-2 mt-5">{{$caseCounts['READYTOCONFIRM']}}</span>
 										<a href="#" class="text-info fw-bold fs-6">Ready To Confirm Cases</a>
 									</div>
 									<!--end::Col-->
@@ -109,7 +109,7 @@
 											</svg>
 										</span>
 										<!--end::Svg Icon-->
-										<span class="text-gray-900 fw-bold d-block fs-2 mb-2 mt-5">{{$confirmedCase}}</span>
+										<span class="text-gray-900 fw-bold d-block fs-2 mb-2 mt-5">{{$caseCounts['CONFIRMED'] }}</span>
 										<a href="#" class="text-success fw-bold fs-6 mt-2">Confirmed Cases</a>
 									</div>
 									<!--end::Col-->
@@ -123,7 +123,7 @@
 											</svg>
 										</span>
 										<!--end::Svg Icon-->
-										<span class="text-gray-900 fw-bold d-block fs-2 mb-2 mt-5">{{$completedCase}}</span>
+										<span class="text-gray-900 fw-bold d-block fs-2 mb-2 mt-5">{{$caseCounts['COMPLETED']}}</span>
 										<a href="#" class="text-success fw-bold fs-6 mt-2">Completed Cases</a>
 									</div>
 									<!--end::Col-->
@@ -141,7 +141,7 @@
 											</svg>
 										</span>
 										<!--end::Svg Icon-->
-										<span class="text-gray-900 fw-bold d-block fs-2 mb-2 mt-5">{{$holdCase}}</span>
+										<span class="text-gray-900 fw-bold d-block fs-2 mb-2 mt-5">{{$caseCounts['HOLD']}}</span>
 										<a href="#" class="text-warning fw-bold fs-6 mt-2">Holding Cases</a>
 									</div>
 									<!--end::Col-->
@@ -155,7 +155,7 @@
 											</svg>
 										</span>
 										<!--end::Svg Icon-->
-										<span class="text-gray-900 fw-bold d-block fs-2 mb-2 mt-5">{{$canceledCase}}</span>
+										<span class="text-gray-900 fw-bold d-block fs-2 mb-2 mt-5">{{$caseCounts['CANCELED']}}</span>
 										<a href="#" class="text-danger fw-bold fs-6 mt-2">Canceled Cases</a>
 									</div>
 									<!--end::Col-->
