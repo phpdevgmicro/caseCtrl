@@ -97,16 +97,16 @@
                     </div>
                     <!--begin::Card header-->
                     <!--begin::Content-->
-                    <div id="kt_account_profile_details" class="collapse show">
+                    <div id="" class="collapse show">
                         <!--begin::Form-->
-                        <div id="kt_account_profile_details_form" class="form">
+                        <div id="" class="form">
                             <!--begin::Card body-->
 
                             <div class="card-body border-top p-9">              
                                 <!--begin::Input group-->
                                 <div class="mb-6">
                                     <label class="required form-label fw-bold fs-8 text-gray-500 text-uppercase">Surgeon</label>
-                                    <select wire:model.live="surgeon" aria-label="Select a Surgeon" data-control="select52" data-placeholder="Select a surgeon..." class="form-select" data-allow-clear="true">
+                                    <select wire:model.live="surgeon" name="surgeon" aria-label="Select a Surgeon" data-control="select52" data-placeholder="Select a surgeon..." class="form-select" data-allow-clear="true">
                                         <option value="">Select a Surgeon</option>
                                         @foreach($surgeons as $value)
                                             <option value="{{ $value->id }}">{{ $value->fullname }}</option>
@@ -115,13 +115,14 @@
                                     @error('surgeon')
                                     <div class="fv-plugins-message-container invalid-feedback"><div data-field="email_input" data-validator="notEmpty">{{$message}}</div></div>
                                     @enderror
+                                    {{$surgeon}}
                                 </div>
                                 <!--end::Input group-->
                             
                                 <!--begin::Input group-->
                                 <div class="mb-6">
                                     <label class="required form-label fw-bold fs-8 text-gray-500 text-uppercase">Location</label>
-                                    <select wire:model="surgery_location" wire:key="{{ $surgeon }} aria-label="Select a Surgery Location" data-control="select2" data-placeholder="Select a surgeon first" class="form-select form-select-solid" data-allow-clear="true">
+                                    <select wire:model="surgery_location" name="surgery_location" wire:key="{{ $surgeon }} aria-label="Select a Surgery Location" data-control="selectd2" data-placeholder="Select a surgeon first" class="form-select form-select-solid" data-allow-clear="true">
                                         <option value="">Select a Surgery Location</option>
                                         @foreach($surgeryLocations as $location)
                                             <option value="{{ $location['id'] }}">{{ $location['address']}} {{$location['city']}} {{$location['state']}}</option>
@@ -135,7 +136,7 @@
                                 <!--begin::Input group-->
                                 <div class="">
                                     <label class="required form-label fw-bold fs-8 text-gray-500 text-uppercase">Clinic Location</label>
-                                    <select wire:model="clinic_location" wire:key="{{ $surgeon }} aria-label="Select a Clinic Location" data-control="select2" data-placeholder="Select a surgeon first" class="form-select form-select-solid" data-allow-clear="true">
+                                    <select wire:model="clinic_location" name="clinic_location" wire:key="{{ $surgeon }} aria-label="Select a Clinic Location" data-control="select2" data-placeholder="Select a surgeon first" class="form-select form-select-solid" data-allow-clear="true">
                                         <option value="">Select a Clinic Location</option>
                                         @foreach($clinicLocations as $location)
                                             <option value="{{ $location['id'] }}">{{ $location['address']}} {{$location['city']}} {{$location['state']}}</option>
@@ -155,7 +156,7 @@
                 </div>
                 <!-- Surgeon info end --->
             
-                <!-- Patient start -->
+              <!-- Patient start -->
                 <div class="card card-xxl-stretch mb-5 mb-xl-8" id="patient" data-kt-scroll-offset="100">
                     <!--begin::Card header-->
                     <div class="card-header border-0">
@@ -173,8 +174,8 @@
                             <div class="card-body border-top p-9">              
                                 <!--begin::Input group-->                
                                 <div class="mb-6">
-                                    <label  class="form-label fw-bold fs-8 text-gray-500 text-uppercase">Medical Record Number (MRN)</label>
-                                    <input type="text" wire:model="mrn" class="form-control" />
+                                    <label class="form-label fw-bold fs-8 text-gray-500 text-uppercase">Medical Record Number (MRN)</label>
+                                    <input type="text" wire:model="mrn" class="form-control" name="mrn">
                                 </div>
                                 <!--end::Input group-->
 
@@ -183,7 +184,7 @@
                                     <!--begin::Col-->
                                     <div class="col-lg-4">
                                         <label class="required form-label fw-bold fs-8 text-gray-500 text-uppercase">First Name</label>
-                                        <input type="text" wire:model="first_name"  class="form-control">
+                                        <input type="text" wire:model="first_name"  class="form-control" name="first_name">
                                         @error('first_name')
                                         <div class="fv-plugins-message-container invalid-feedback"><div data-field="email_input" data-validator="notEmpty">{{$message}}</div></div>
                                         @enderror
@@ -194,7 +195,7 @@
                                     <!--begin::Col-->
                                     <div class="col-lg-4">
                                         <label class="required form-label fw-bold fs-8 text-gray-500 text-uppercase">Last Name</label>
-                                        <input type="text" wire:model="last_name"  class="form-control">
+                                        <input type="text" wire:model="last_name"  class="form-control" name="last_name">
                                         @error('last_name')
                                         <div class="fv-plugins-message-container invalid-feedback"><div data-field="email_input" data-validator="notEmpty">{{$message}}</div></div>
                                         @enderror
@@ -205,7 +206,7 @@
                                     <!--begin::Col-->
                                     <div class="col-lg-4">
                                         <label class="required form-label fw-bold fs-8 text-gray-500 text-uppercase">Date of Birth</label>
-                                        <input type="date" wire:model="dob" class="form-control">
+                                        <input type="date" wire:model="dob" class="form-control" name="dob">
                                         @error('dob')
                                         <div class="fv-plugins-message-container invalid-feedback"><div data-field="email_input" data-validator="notEmpty">{{$message}}</div></div>
                                         @enderror
@@ -219,14 +220,14 @@
                                     <!--begin::Col-->
                                     <div class="col-lg-6">
                                         <label class="form-label fw-bold fs-8 text-gray-500 text-uppercase">SSN</label>
-                                        <input type="text" wire:model="ssn" class="form-control">
+                                        <input type="text" wire:model="ssn" class="form-control" name="ssn">
                                     </div>
                                     <!--end::Col-->
 
                                     <!--begin::Col-->
                                     <div class="col-lg-6">
                                         <label for="gender" class="form-label fw-bold fs-8 text-gray-500 text-uppercase">Gender</label>
-                                        <select wire:model="gender" aria-label="Select gender"  data-placeholder="Select gender" class="form-select" data-allow-clear="true" data-hide-search="true">
+                                        <select wire:model="gender" name="gender" aria-label="Select gender" data-placeholder="Select gender" class="form-select" data-allow-clear="true" data-hide-search="true" >
                                             <option value="">Select gender</option>
                                             <option value="male">Male</option>
                                             <option value="female">Female</option>
@@ -241,21 +242,21 @@
                                     <!--begin::Col-->
                                     <div class="col-lg-4">
                                         <label class="form-label fw-bold fs-8 text-gray-500 text-uppercase">Email</label>
-                                        <input wire:model="email" class="form-control" id="kt_inputmask_email">
+                                        <input wire:model="email" class="form-control" id="kt_inputmask_email" name="email">
                                     </div>
                                     <!--end::Col-->
 
                                     <!--begin::Col-->
                                     <div class="col-lg-4">
                                         <label class="form-label fw-bold fs-8 text-gray-500 text-uppercase">Mobile/Phone Number</label>
-                                        <input wire:model="phone" class="form-control kt_inputmask_phone">
+                                        <input wire:model="phone" class="form-control kt_inputmask_phone" name="phone" type="text">
                                     </div>
                                     <!--end::Col-->     
                                     
                                     <!--begin::Col-->
                                     <div class="col-lg-4">
                                         <label class="form-label fw-bold fs-8 text-gray-500 text-uppercase">Home Phone Number</label>
-                                        <input wire:model="phone2" class="form-control kt_inputmask_phone">
+                                        <input wire:model="phone2" class="form-control kt_inputmask_phone" name="phone2" type="text">
                                     </div>
                                     <!--end::Col-->  
                                 </div>
@@ -264,7 +265,7 @@
                                     <!--begin::Col-->
                                     <div class="col">
                                         <label class="form-label fw-bold fs-8 text-gray-500 text-uppercase">Address Line 1</label>
-                                        <input type="text" wire:model="address1" class="form-control">
+                                        <input type="text" wire:model="address1" class="form-control" name="address1">
                                     </div>
                                     <!--end::Col-->
                                 </div>
@@ -273,14 +274,14 @@
                                     <!--begin::Col-->
                                     <div class="col-sm-6">
                                         <label class="form-label fw-bold fs-8 text-gray-500 text-uppercase">Address Line 2</label>
-                                        <input type="text" wire:model="address2" class="form-control">
+                                        <input type="text" wire:model="address2" class="form-control" name="address2">
                                     </div>
                                     <!--end::Col-->
 
                                     <!--begin::Col-->
                                     <div class="col-sm-6">
                                         <label class="form-label fw-bold fs-8 text-gray-500 text-uppercase">City</label>
-                                        <input type="text" wire:model="city" class="form-control">
+                                        <input type="text" wire:model="city" class="form-control" name="city">
                                     </div>
                                     <!--end::Col-->
                                 </div>
@@ -289,7 +290,7 @@
                                     <!--begin::Col-->
                                     <div class="col-sm-6">
                                         <label class="form-label fw-bold fs-8 text-gray-500 text-uppercase">State</label>
-                                        <input type="text" wire:model="state" class="form-control">
+                                        <input type="text" wire:model="state" class="form-control" name="state">
                                     </div>
                                     <!--end::Col-->
 
@@ -303,7 +304,7 @@
 
                                 <div class="row">
                                     <label class="form-check form-check-custom">
-                                        <input class="form-check-input h-20px w-20px" wire:model="guardian" type="checkbox"/>
+                                        <input class="form-check-input h-20px w-20px" wire:model="guardian" type="checkbox" name="guardian">
                                         <span class="form-check-label fw-bold">
                                             Does patient have a guardian?
                                         </span>
@@ -316,6 +317,8 @@
                     <!--end::Content-->
                 </div>
                 <!-- Patient end -->
+
+                
             
                 <!-- Scheduling start -->
                 <div class="card card-xxl-stretch mb-5 mb-xl-8" id="scheduling" data-kt-scroll-offset="100" >
@@ -339,7 +342,7 @@
                                     <label class="required form-label fw-bold text-uppercase fs-8 text-gray-500">Scheduling Priority</label>
                                     <div class="mb-4">
                                         <label class="form-check form-check-custom">
-                                            <input class="form-check-input h-20px w-20px" type="radio" wire:model="priority" value="High"/>
+                                            <input class="form-check-input h-20px w-20px" type="radio" name="priority" wire:model="priority" value="High"/>
                                             <span class="form-check-label fw-bold">
                                                 <span class="badge badge-light-success text-success fs-7 fw-bolder">High</span> must be done ASAP
                                             </span>
@@ -348,7 +351,7 @@
 
                                     <div class="mb-4">
                                         <label class="form-check form-check-custom">
-                                            <input class="form-check-input h-20px w-20px" type="radio" wire:model="priority" value="Medium"  />
+                                            <input class="form-check-input h-20px w-20px" type="radio" name="priority" wire:model="priority" value="Medium"  />
                                             <span class="form-check-label fw-bold">
                                                 <span class="badge badge-light-warning text-warning fs-7 fw-bolder">Medium</span> can be done within next 2 weeks
                                             </span>
@@ -357,7 +360,7 @@
                                
                                     <div class="mb-4">
                                         <label class="form-check form-check-custom">
-                                            <input class="form-check-input h-20px w-20px" type="radio" wire:model="priority" value="Low" checked/>
+                                            <input class="form-check-input h-20px w-20px" type="radio" wire:model="priority" value="Low" name="priority" checked/>
                                             <span class="form-check-label fw-bold">
                                                 <span class="badge badge-light-dark text-muted fs-7 fw-bolder">Low</span> Elective, at patient's discretion (default priority)
                                             </span>
@@ -381,7 +384,7 @@
                                 <div class="row mb-10">
                                     <div class="mb-3">
                                         <label class="form-check form-check-custom">
-                                            <input class="form-check-input h-20px w-20px"  wire:model="scheduling_status" type="radio" value="scheduler discretion" checked/>
+                                            <input class="form-check-input h-20px w-20px" name="scheduling_status" wire:model="scheduling_status" type="radio" value="scheduler discretion" checked/>
                                             <span class="form-check-label fw-bold">
                                             Scheduler's Discretion
                                             </span>
@@ -390,7 +393,7 @@
 
                                     <div class="mb-3">
                                         <label class="form-check form-check-custom">
-                                            <input class="form-check-input h-20px w-20px" wire:model="scheduling_status" type="radio" value="patient undecided"/>
+                                            <input class="form-check-input h-20px w-20px" wire:model="scheduling_status" type="radio" value="patient undecided" name="scheduling_status" />
                                             <span class="form-check-label fw-bold">
                                                 Patient Undecided
                                             </span>
@@ -425,7 +428,7 @@
                                     </div> 
                                     <div class="mb-3">
                                         <label class="form-check form-check-custom">
-                                            <input class="form-check-input h-20px w-20px"  type="checkbox" wire:model="clearance" value="PCP"/>
+                                            <input class="form-check-input h-20px w-20px" type="checkbox" wire:model="clearance" value="PCP"/>
                                             <span class="form-check-label fw-bold">
                                             Require PCP Clearance
                                             </span>
@@ -462,7 +465,6 @@
                     <!--begin::Content-->
                     <div id="kt_account_profile_details" class="collapse show">
                         <!--begin::Form-->
-                        <!-- <form id="kt_account_profile_details_form" class="form"> -->
                             <!--begin::Card body-->
                             <div class="card-body border-top p-9">
 
@@ -576,7 +578,7 @@
                                     <label class="required form-label fw-bold fs-8 text-gray-500 text-uppercase">Admission Plan</label>
                                     <div class="mb-3">
                                         <label class="form-check form-check-custom">
-                                            <input class="form-check-input h-20px w-20px" type="radio" wire:model="admission_plan" value="outpatient" checked/>
+                                            <input class="form-check-input h-20px w-20px" type="radio" name="admission_plan" wire:model="admission_plan" value="outpatient" checked/>
                                             <span class="form-check-label fw-bold">
                                             Outpatient
                                             </span>
@@ -585,7 +587,7 @@
 
                                     <div class="mb-3">
                                         <label class="form-check form-check-custom">
-                                            <input class="form-check-input h-20px w-20px" type="radio" wire:model="admission_plan"  value="extended_recovery"/>
+                                            <input class="form-check-input h-20px w-20px" type="radio" name="admission_plan" wire:model="admission_plan"  value="extended_recovery"/>
                                             <span class="form-check-label fw-bold">
                                                 Extended Recovery (23 Hours Observation)
                                             </span>
@@ -594,7 +596,7 @@
 
                                     <div class="mb-3">
                                         <label class="form-check form-check-custom">
-                                            <input class="form-check-input h-20px w-20px"  type="radio" wire:model="admission_plan"  value="same_day_admit"/>
+                                            <input class="form-check-input h-20px w-20px" name="admission_plan" type="radio" wire:modal="admission_plan"  value="same_day_admit"/>
                                             <span class="form-check-label fw-bold">
                                                 Same Day Admit
                                             </span>
@@ -604,7 +606,7 @@
                                         <span class="text-red-500 text-xs mt-3 block ">{{$message}}</span>
                                     @enderror
                                 </div> 
-                                
+                                {{$admission_plan}}
                                 <!--end::Input group-->
                                 <div class="row">
                                     <label class="form-check form-check-custom">
@@ -626,14 +628,11 @@
                 <div class="card card-xxl-stretch mb-5 mb-xl-8">
                     <!--begin::Content-->
                     <div id="kt_account_profile_details" class="collapse show">
-                 
                         <div class="card-body border-top p-3">
-                            <button type="submit" class="btn btn-light-success me-2 mb-2"  wire:click="$set('save_as', 'quick-pick')">Save as New Quick Pick</button>
-                            <button type="reset" class="btn btn-outline btn-outline-solid btn-outline-success btn-active-light-success me-2 mb-2">Reset</button>
-                            <button type="submit" class="btn btn-outline btn-outline-solid btn-outline-success btn-active-light-success me-2 mb-2" wire:click="$set('save_as', 'draft')">Save as Draft</button>
+                            <button type="submit" class="btn btn-light-success me-2 mb-2" wire:click="$set('save_as', 'quick-pick')">Save as New Quick Pick</button>
+                            <button type="reset" class="btn btn-outline btn-outline-solid btn-outline-success btn-active-light-success me-2 mb-2" wire:click="$set('save_as', 'reset')" >Reset</button>
+                            <button type="submit" class="btn btn-outline btn-outline-solid btn-outline-success btn-active-light-success me-2 mb-2" wire:click="$set('save_as', 'drafts')">Save as Draft</button>
                             <button class="btn btn-success mb-2" type="submit" wire:click="$set('save_as', 'new-case')">Create Case</button>
-                            <span wire:loading>Saving...</span> 
-                            
                         </div> 
                     </div>
                     <!--end::Content-->
@@ -652,20 +651,13 @@
         }else{
             toastr.success(data.msg);
         }        
+    }); 
+    $wire.on('aside-enabled', () => {
+        console.log('ee');
+        setTimeout(function () {
+            $('#kt_aside').css({position:'fixed', top:'95px', zIndex:95, width:'265px'})
+        }, 10);         
     });
-    document.addEventListener('livewire:initialized', () => {
-
-        Livewire.hook('component.init', ({ component, cleanup }) => {
-          console.log('inittt');
-          console.log(component);
-          console.log(cleanup);
-          if(component.name == "user.new-case"){
-            console.log('inittt');
-           
-          }
-        })
-        
-    })
 </script>
 @endscript
 

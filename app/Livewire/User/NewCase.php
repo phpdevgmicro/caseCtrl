@@ -62,10 +62,11 @@ class NewCase extends Component
     }    
 
     public function saveCase()
-    {           
-        try {            
-            $this->validate(); 
-            //dd($this->all());
+    {      
+        $this->dispatch('aside-enabled');  
+        $this->validate();    
+        try { 
+            
             DB::beginTransaction();
 
             $patient = new Patient;       
@@ -155,6 +156,9 @@ class NewCase extends Component
 
     public function render()
     {
+        if($this->save_as){
+            $this->dispatch('aside-enabled'); 
+        }
         return view('livewire.user.new-case', [
             'sections' => [
                 ["id" => "surgeon", "title" => "Surgeon Information", "icon" => '<i class="las la-user-md text-gray-400 fs-1"></i>'],
