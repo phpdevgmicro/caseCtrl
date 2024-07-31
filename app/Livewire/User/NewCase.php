@@ -155,8 +155,8 @@ class NewCase extends Component
     }
 
     public function render()
-    {
-        if($this->save_as){
+    {       
+        if($this->save_as == 'reset'){
             $this->dispatch('aside-enabled'); 
         }
         return view('livewire.user.new-case', [

@@ -653,7 +653,6 @@
         }        
     }); 
     $wire.on('aside-enabled', () => {
-        console.log('ee');
         setTimeout(function () {
             $('#kt_aside').css({position:'fixed', top:'95px', zIndex:95, width:'265px'})
         }, 10);         
