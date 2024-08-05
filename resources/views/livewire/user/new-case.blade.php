@@ -114,8 +114,7 @@
                                     </select>                                  
                                     @error('surgeon')
                                     <div class="fv-plugins-message-container invalid-feedback"><div data-field="email_input" data-validator="notEmpty">{{$message}}</div></div>
-                                    @enderror
-                                    {{$surgeon}}
+                                    @enderror                                
                                 </div>
                                 <!--end::Input group-->
                             
@@ -500,8 +499,11 @@
                             <div class="card-body border-top p-9">
                                 <!--begin::Input group-->                
                                 <div class="mb-6">
-                                    <label class="form-label fw-bold text-uppercase fs-8 text-gray-500">Surgery Case Title</label>
+                                    <label class="required form-label fw-bold text-uppercase fs-8 text-gray-500">Surgery Case Title</label>
                                     <input type="text" wire:model="case_title" class="form-control">
+                                    @error('case_title')
+                                        <div class="fv-plugins-message-container invalid-feedback"><div data-field="email_input" data-validator="notEmpty">{{$message}}</div></div>
+                                    @enderror
                                 </div>
                                 <!--end::Input group-->
 
@@ -606,7 +608,7 @@
                                         <span class="text-red-500 text-xs mt-3 block ">{{$message}}</span>
                                     @enderror
                                 </div> 
-                                {{$admission_plan}}
+                              
                                 <!--end::Input group-->
                                 <div class="row">
                                     <label class="form-check form-check-custom">
@@ -653,6 +655,7 @@
         }        
     }); 
     $wire.on('aside-enabled', () => {
+        //console.log('ee');
         setTimeout(function () {
             $('#kt_aside').css({position:'fixed', top:'95px', zIndex:95, width:'265px'})
         }, 10);         

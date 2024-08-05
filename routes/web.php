@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Livewire\User\dashboard;
+use App\Livewire\User\Dashboard;
 use App\Livewire\User\NewCase;
 use App\Livewire\User\Cases;
 
@@ -12,10 +12,28 @@ Route::get('login', function () {
 Route::post('login', [AuthController::class, 'authenticate'])->middleware('throttle:login');
 Route::get('signout', [AuthController::class, 'logout']);
 
+Route::post('recover-password', [AuthController::class, 'recoverPassword'])->middleware('guest');
+Route::get('forgot-password', function () {
+    return view('auth.forgot-password');
+})->middleware('guest');
+
+Route::get('reset-password', function (Illuminate\Http\Request $request) {
+    $token = $request->query('token');
+    $email = $request->query('email');
+    return view('reset-password', ['token' => $token, 'email' => $email]);
+})->middleware('guest')->name('password.reset');
+Route::post('auth.reset-password', [AuthController::class, 'resetPassword'])->middleware('guest');
+
 Route::middleware('auth')->group(function () {
     Route::get('/', Dashboard::class)->name('dashboard');
     Route::get('/new-case', NewCase::class);
     Route::get('/cases', Cases::class);
+    Route::get('/account-setting', function () {
+        return view('account-setting');
+    });    
+    Route::get('/profile', function () {
+        return view('profile');
+    });
 });
 
 

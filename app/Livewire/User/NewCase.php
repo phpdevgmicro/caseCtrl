@@ -28,7 +28,6 @@ class NewCase extends Component
     public $neuromuscular_monitoring = false;
     public $facilty_equipment;
 
-    public $case_title;
     public $blood_unit = 0;
     public $facility_equipment;
     public $admission_plan='outpatient';
@@ -50,7 +49,7 @@ class NewCase extends Component
     public $gender ;
 
     #[Validate('required')]
-    public $surgeon, $first_name, $last_name, $dob, $surgery_location, $clinic_location, $surgery_duration; 
+    public $surgeon, $first_name, $last_name, $dob, $surgery_location, $clinic_location, $surgery_duration , $case_title; 
     
     public $surgeryLocations = [];
     public $surgeons = [];
@@ -117,7 +116,7 @@ class NewCase extends Component
                 $case->case_status = "DRAFT"; 
             }
             $case->save();
-
+            
             DB::commit();
             
             $this->dispatch('save-case', status: 'success', msg: 'Case is save successfully as '.$this->save_as);
@@ -155,7 +154,7 @@ class NewCase extends Component
     }
 
     public function render()
-    {       
+    {
         if($this->save_as == 'reset'){
             $this->dispatch('aside-enabled'); 
         }

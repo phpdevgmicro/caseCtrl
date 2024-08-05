@@ -1,75 +1,67 @@
 @extends('layouts.guest')
 @section('content')
 
-<div class="d-flex flex-column flex-root">
-    <!--begin::Authentication - Sign-in -->
-    <div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed" style="background-image: url(assets/media/illustrations/sigma-1/14.png">
-        <!--begin::Content-->
-        <div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
-            <!--begin::Logo-->
-            <div class="mb-12">
-                <img alt="Logo" src="assets/media/logos/logo-1.svg" class="h-40px" />
-            </div>
-            <!--end::Logo-->
-            <!--begin::Wrapper-->
-            <div class="w-lg-500px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
-                <!--begin::Form-->
-                <form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" action="#">
-                    <!--begin::Heading-->
-                    <div class="text-center mb-10">
-                        <!--begin::Title-->
-                        <h1 class="text-dark mb-3">Sign In to Metronic</h1>
-                        <!--end::Title-->                       
-                    </div>
-                    <!--begin::Heading-->
-                    <!--begin::Input group-->
-                    <div class="fv-row mb-10">
-                        <!--begin::Label-->
-                        <label class="form-label fs-6 fw-bolder text-dark">Email</label>
-                        <!--end::Label-->
-                        <!--begin::Input-->
-                        <input class="form-control form-control-lg form-control-solid" type="text" name="email" autocomplete="off" />
-                        <!--end::Input-->
-                    </div>
-                    <!--end::Input group-->
-                    <!--begin::Input group-->
-                    <div class="fv-row mb-10">
-                        <!--begin::Wrapper-->
-                        <div class="d-flex flex-stack mb-2">
-                            <!--begin::Label-->
-                            <label class="form-label fw-bolder text-dark fs-6 mb-0">Password</label>
-                            <!--end::Label-->
+    <div class="d-flex flex-column flex-root">
+			<!--begin::Authentication - Password reset -->
+        <div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed" style="background-image: url(assets/media/illustrations/sigma-1/14.png">
+            <!--begin::Content-->
+            <div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
+                <!--begin::Logo-->
+                <div class="mb-12">
+                    <img alt="Logo" src="assets/media/logos/logo-1.svg" class="h-40px" />
+                </div>
+                <!--end::Logo-->
+                <!--begin::Wrapper-->
+                <div class="w-lg-500px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
+                    <!--begin::Form-->
+                    <form class="form w-100" novalidate="novalidate" id="kt_password_reset_form">
+                        <!--begin::Heading-->
+                        <div class="text-center mb-10">
+                            <!--begin::Title-->
+                            <h1 class="text-dark mb-3">Forgot Password ?</h1>
+                            <!--end::Title-->
                             <!--begin::Link-->
-                            <a href="{{URL::to('forgot-password')}}" class="link-primary fs-6 fw-bolder">Forgot Password ?</a>
+                            <div class="text-gray-400 fw-bold fs-4">Enter your email to reset your password.</div>
                             <!--end::Link-->
                         </div>
-                        <!--end::Wrapper-->
-                        <!--begin::Input-->
-                        <input class="form-control form-control-lg form-control-solid" type="password" name="password" autocomplete="off" />
-                        <!--end::Input-->
-                    </div>
-                    <!--end::Input group-->
-                    <!--begin::Actions-->
-                    <div class="text-center">
-                        <!--begin::Submit button-->
-                        <button type="submit" id="kt_sign_in_submit" class="btn btn-lg btn-primary w-100 mb-5">
-                            <span class="indicator-label">Continue</span>
-                            <span class="indicator-progress">Please wait...
-                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                        </button>
-                        <!--end::Submit button-->
-                    </div>
-                    <!--end::Actions-->
-                </form>
-                <!--end::Form-->
+                        <!--begin::Heading-->
+                        <!--begin::Input group-->
+                        <div class="fv-row mb-10">
+                            <label class="form-label fw-bolder text-gray-900 fs-6">Email</label>
+                            <input class="form-control" type="email" placeholder="" name="email" autocomplete="off" />
+                        </div>
+                        <!--end::Input group-->
+                        <!--begin::Actions-->
+                        <div class="d-flex flex-wrap justify-content-center pb-lg-0">
+                            <button type="button" id="kt_password_reset_submit" class="btn btn-lg btn-primary fw-bolder me-4">
+                                <span class="indicator-label">Submit</span>
+                                <span class="indicator-progress">Please wait...
+                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                            </button>
+                            <a href="{{URL::to('login')}}" class="btn btn-lg btn-light-primary fw-bolder">Cancel</a>
+                        </div>
+                        <!--end::Actions-->
+                    </form>
+                    <!--end::Form-->
+                </div>
+                <!--end::Wrapper-->
             </div>
-            <!--end::Wrapper-->
+            <!--end::Content-->
+            <!--begin::Footer-->
+            <div class="d-flex flex-center flex-column-auto p-10">
+                <!--begin::Links-->
+                <div class="d-flex align-items-center fw-bold fs-6">
+                    <a href="https://keenthemes.com" class="text-muted text-hover-primary px-2">About</a>
+                    <a href="mailto:support@keenthemes.com" class="text-muted text-hover-primary px-2">Contact</a>
+                    <a href="https://1.envato.market/EA4JP" class="text-muted text-hover-primary px-2">Contact Us</a>
+                </div>
+                <!--end::Links-->
+            </div>
+            <!--end::Footer-->
         </div>
-        <!--end::Content-->
+        <!--end::Authentication - Password reset-->
     </div>
-    <!--end::Authentication - Sign-in-->
-</div>
-@endsection
+@endsection    
 
 @push('page-scripts')
 <script>
@@ -98,14 +90,7 @@ var KTSigninGeneral = function() {
 								message: 'The value is not a valid email address'
 							}
 						}
-					},
-                    'password': {
-                        validators: {
-                            notEmpty: {
-                                message: 'The password is required'
-                            }
-                        }
-                    } 
+					}
 				},
 				plugins: {
 					trigger: new FormValidation.plugins.Trigger(),
@@ -134,12 +119,11 @@ var KTSigninGeneral = function() {
 
                     // Append the text fields
                     formData.append('email', form.querySelector('[name="email"]').value);
-                    formData.append('password', form.querySelector('[name="password"]').value);
                     formData.append('_token', '{{ csrf_token() }}');
                    
                     $.ajax({
                         type:'POST',
-                        url:"{{ URL::to('login') }}",                       
+                        url:"{{ URL::to('recover-password') }}",                       
                         data:formData,
                         contentType: false,
                         processData: false,                    
@@ -197,8 +181,8 @@ var KTSigninGeneral = function() {
     return {
         // Initialization
         init: function() {
-            form = document.querySelector('#kt_sign_in_form');
-            submitButton = document.querySelector('#kt_sign_in_submit');
+            form = document.querySelector('#kt_password_reset_form');
+            submitButton = document.querySelector('#kt_password_reset_submit');
             
             handleForm();
         }
